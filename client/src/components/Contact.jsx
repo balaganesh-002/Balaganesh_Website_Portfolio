@@ -1,0 +1,200 @@
+import { useState } from 'react';
+import { Mail, Send, Loader2 } from 'lucide-react';
+import { FaLinkedin, FaGithub } from 'react-icons/fa';
+import { motion } from 'framer-motion';
+
+const Contact = () => {
+  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+  const [status, setStatus] = useState('idle'); // idle, loading, success, error
+  const [errorMessage, setErrorMessage] = useState('');
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setStatus('loading');
+    setErrorMessage('');
+
+    try {
+      const response = await fetch('http://localhost:5000/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setStatus('success');
+        setFormData({ name: '', email: '', message: '' });
+        setTimeout(() => setStatus('idle'), 5000);
+      } else {
+        setStatus('error');
+        setErrorMessage(data.error || 'Something went wrong. Please try again.');
+      }
+    } catch (error) {
+      setStatus('error');
+      setErrorMessage('Unable to connect to the server. Please try again later.');
+    }
+  };
+
+  return (
+    <section id="contact" className="py-24 relative overflow-hidden bg-slate-50 dark:bg-dark-surface/50">
+      {/* Background Glow */}
+      <div className="absolute bottom-[0%] right-[-10%] w-[40%] h-[40%] rounded-full bg-primary-600/10 dark:bg-primary-500/10 blur-[120px] pointer-events-none mix-blend-screen"></div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="text-center mb-20"
+        >
+          <h2 className="text-4xl md:text-5xl font-black text-slate-900 dark:text-white mb-6 tracking-tight">
+            Let's Connect
+          </h2>
+          <div className="w-24 h-1.5 bg-gradient-to-r from-neon-blue to-primary-500 mx-auto rounded-full shadow-[0_0_15px_rgba(0,240,255,0.5)]"></div>
+          <p className="mt-8 text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
+            I'm currently available for freelance work or full-time opportunities. If you have a project that you want to get started, think you need my help with something or just fancy saying hey, then get in touch.
+          </p>
+        </motion.div>
+
+        <div className="grid lg:grid-cols-5 gap-12 items-start">
+          
+          {/* Contact Info */}
+          <motion.div 
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="lg:col-span-2 bg-white dark:bg-dark-surface/80 backdrop-blur-xl p-10 rounded-3xl border border-slate-200 dark:border-white/10 shadow-xl"
+          >
+            <div className="flex flex-col items-center text-center gap-4 mb-10">
+              <div className="relative w-24 h-24 rounded-full p-1 bg-gradient-to-tr from-primary-500 to-neon-blue shadow-[0_0_20px_rgba(0,240,255,0.4)]">
+                <img 
+                  src="/profile.png" 
+                  alt="Balaganesh S" 
+                  className="w-full h-full rounded-full object-cover border-4 border-white dark:border-dark-surface"
+                />
+              </div>
+              <div>
+                <h3 className="text-2xl font-bold text-slate-900 dark:text-white">Balaganesh S</h3>
+                <p className="text-primary-600 dark:text-neon-blue font-medium mt-1">MERN Stack Developer</p>
+              </div>
+            </div>
+
+            <div className="space-y-6">
+              <a href="mailto:your.email@example.com" className="flex items-center gap-6 text-slate-600 dark:text-slate-400 hover:text-primary-600 dark:hover:text-neon-blue transition-colors group">
+                <motion.div whileHover={{ scale: 1.1, rotate: 5 }} className="p-4 bg-slate-50 dark:bg-dark-bg border border-slate-100 dark:border-white/5 rounded-2xl group-hover:border-primary-500/50 shadow-sm transition-colors">
+                  <Mail size={24} />
+                </motion.div>
+                <span className="font-medium text-lg">Email Me</span>
+              </a>
+              <a href="https://linkedin.com/in/yourprofile" target="_blank" rel="noopener noreferrer" className="flex items-center gap-6 text-slate-600 dark:text-slate-400 hover:text-primary-600 dark:hover:text-neon-purple transition-colors group">
+                <motion.div whileHover={{ scale: 1.1, rotate: -5 }} className="p-4 bg-slate-50 dark:bg-dark-bg border border-slate-100 dark:border-white/5 rounded-2xl group-hover:border-primary-500/50 shadow-sm transition-colors">
+                  <FaLinkedin size={24} />
+                </motion.div>
+                <span className="font-medium text-lg">LinkedIn</span>
+              </a>
+              <a href="https://github.com/yourusername" target="_blank" rel="noopener noreferrer" className="flex items-center gap-6 text-slate-600 dark:text-slate-400 hover:text-primary-600 dark:hover:text-white transition-colors group">
+                <motion.div whileHover={{ scale: 1.1, rotate: 5 }} className="p-4 bg-slate-50 dark:bg-dark-bg border border-slate-100 dark:border-white/5 rounded-2xl group-hover:border-primary-500/50 shadow-sm transition-colors">
+                  <FaGithub size={24} />
+                </motion.div>
+                <span className="font-medium text-lg">GitHub</span>
+              </a>
+            </div>
+          </motion.div>
+
+          {/* Contact Form */}
+          <motion.div 
+            initial={{ opacity: 0, x: 50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="lg:col-span-3 bg-white dark:bg-dark-surface/80 backdrop-blur-xl p-10 rounded-3xl border border-slate-200 dark:border-white/10 shadow-xl"
+          >
+            <form onSubmit={handleSubmit} className="space-y-8">
+              <div className="grid md:grid-cols-2 gap-8">
+                <div className="space-y-3 relative group">
+                  <label htmlFor="name" className="text-sm font-bold text-slate-700 dark:text-slate-300 ml-1">Name</label>
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    required
+                    className="w-full px-5 py-4 rounded-2xl bg-slate-50 dark:bg-dark-bg border-2 border-slate-200 dark:border-white/10 focus:outline-none focus:border-primary-500 dark:focus:border-neon-blue text-slate-900 dark:text-white transition-all shadow-sm focus:shadow-[0_0_15px_rgba(0,240,255,0.2)]"
+                    placeholder="John Doe"
+                  />
+                </div>
+                <div className="space-y-3 relative group">
+                  <label htmlFor="email" className="text-sm font-bold text-slate-700 dark:text-slate-300 ml-1">Email</label>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    required
+                    className="w-full px-5 py-4 rounded-2xl bg-slate-50 dark:bg-dark-bg border-2 border-slate-200 dark:border-white/10 focus:outline-none focus:border-primary-500 dark:focus:border-neon-purple text-slate-900 dark:text-white transition-all shadow-sm focus:shadow-[0_0_15px_rgba(176,38,255,0.2)]"
+                    placeholder="john@example.com"
+                  />
+                </div>
+              </div>
+              <div className="space-y-3 relative group">
+                <label htmlFor="message" className="text-sm font-bold text-slate-700 dark:text-slate-300 ml-1">Message</label>
+                <textarea
+                  id="message"
+                  name="message"
+                  value={formData.message}
+                  onChange={handleChange}
+                  required
+                  rows="5"
+                  className="w-full px-5 py-4 rounded-2xl bg-slate-50 dark:bg-dark-bg border-2 border-slate-200 dark:border-white/10 focus:outline-none focus:border-primary-500 dark:focus:border-neon-blue text-slate-900 dark:text-white transition-all shadow-sm focus:shadow-[0_0_15px_rgba(0,240,255,0.2)] resize-none"
+                  placeholder="How can I help you?"
+                ></textarea>
+              </div>
+
+              {status === 'success' && (
+                <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="p-4 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-500/30 text-green-700 dark:text-green-400 rounded-2xl text-sm font-bold flex items-center justify-center">
+                  Message sent successfully! I will get back to you soon.
+                </motion.div>
+              )}
+
+              {status === 'error' && (
+                <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-500/30 text-red-700 dark:text-red-400 rounded-2xl text-sm font-bold flex items-center justify-center">
+                  {errorMessage}
+                </motion.div>
+              )}
+
+              <motion.button
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                type="submit"
+                disabled={status === 'loading'}
+                className="w-full flex items-center justify-center gap-3 bg-gradient-to-r from-primary-600 to-primary-800 dark:from-primary-600 dark:to-neon-blue text-white px-8 py-5 rounded-2xl font-bold text-lg transition-all shadow-[0_0_20px_rgba(0,240,255,0.3)] disabled:opacity-70 disabled:cursor-not-allowed hover:shadow-[0_0_30px_rgba(0,240,255,0.5)] border border-white/10"
+              >
+                {status === 'loading' ? (
+                  <Loader2 size={24} className="animate-spin" />
+                ) : (
+                  <>
+                    Send Message
+                    <Send size={20} />
+                  </>
+                )}
+              </motion.button>
+            </form>
+          </motion.div>
+          
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default Contact;

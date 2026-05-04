@@ -1,0 +1,45 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: 'Inter', sans-serif;
+  
+  --color-primary-50: #f5f3ff;
+  --color-primary-100: #ede9fe;
+  --color-primary-200: #ddd6fe;
+  --color-primary-300: #c4b5fd;
+  --color-primary-400: #a78bfa;
+  --color-primary-500: #8b5cf6;
+  --color-primary-600: #7c3aed;
+  --color-primary-700: #6d28d9;
+  --color-primary-800: #5b21b6;
+  --color-primary-900: #4c1d95;
+  
+  --color-neon-blue: #00f0ff;
+  --color-neon-purple: #b026ff;
+  
+  --color-dark-bg: #030014;
+  --color-dark-surface: #0f0a29;
+  --color-dark-border: #1f1650;
+  
+  --animate-shine: shine 1.5s infinite;
+  
+  @keyframes shine {
+    100% {
+      transform: skewX(-12deg) translateX(200%);
+    }
+  }
+}
+
+@layer base {
+  body {
+    @apply antialiased text-slate-800 bg-white dark:bg-dark-bg dark:text-slate-200 transition-colors duration-300;
+    font-family: 'Inter', sans-serif;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
