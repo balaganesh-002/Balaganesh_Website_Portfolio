@@ -19,7 +19,8 @@ const Contact = () => {
     setErrorMessage('');
 
     try {
-      const response = await fetch('http://localhost:5000/api/contact', {
+      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+      const response = await fetch(`${apiUrl}/api/contact`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
@@ -88,13 +89,13 @@ const Contact = () => {
             </div>
 
             <div className="space-y-6">
-              <a href="mailto:your.email@example.com" className="flex items-center gap-6 text-slate-600 dark:text-slate-400 hover:text-primary-600 dark:hover:text-neon-blue transition-colors group">
+              <a href="mailto:sbalaganesh148@gmail.com" className="flex items-center gap-6 text-slate-600 dark:text-slate-400 hover:text-primary-600 dark:hover:text-neon-blue transition-colors group">
                 <motion.div whileHover={{ scale: 1.1, rotate: 5 }} className="p-4 bg-slate-50 dark:bg-dark-bg border border-slate-100 dark:border-white/5 rounded-2xl group-hover:border-primary-500/50 shadow-sm transition-colors">
                   <Mail size={24} />
                 </motion.div>
                 <span className="font-medium text-lg">Email Me</span>
               </a>
-              <a href="https://linkedin.com/in/yourprofile" target="_blank" rel="noopener noreferrer" className="flex items-center gap-6 text-slate-600 dark:text-slate-400 hover:text-primary-600 dark:hover:text-neon-purple transition-colors group">
+              <a href="https://www.linkedin.com/in/sbalaganesh148" target="_blank" rel="noopener noreferrer" className="flex items-center gap-6 text-slate-600 dark:text-slate-400 hover:text-primary-600 dark:hover:text-neon-purple transition-colors group">
                 <motion.div whileHover={{ scale: 1.1, rotate: -5 }} className="p-4 bg-slate-50 dark:bg-dark-bg border border-slate-100 dark:border-white/5 rounded-2xl group-hover:border-primary-500/50 shadow-sm transition-colors">
                   <FaLinkedin size={24} />
                 </motion.div>

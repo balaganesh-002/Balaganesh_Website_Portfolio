@@ -63,7 +63,7 @@ const seedData = {
       description: "A freelance marketplace platform with role-based dashboards for freelancers and clients. Features reusable React components for scalable UI architecture.",
       tags: ["React.js", "Node.js", "Express", "MongoDB", "Tailwind CSS"],
       github: "#",
-      live: "https://jobkickers.netlify.app",
+      live: "jobkickers.netlify.app",
       image: "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&q=80&w=800",
     },
     {
@@ -71,8 +71,16 @@ const seedData = {
       description: "A dynamic React-based food delivery application showcasing robust product handling, state management via hooks, and seamless user interaction.",
       tags: ["React.js", "Context API", "CSS/SCSS", "REST API"],
       github: "#",
-      live: "https://ecommerence-food-website.netlify.app",
+      live: "ecommerence-food-website.netlify.app",
       image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&q=80&w=800",
+    },
+    {
+      title: "Coffee Shop Website",
+      description: "A responsive coffee shop website built using HTML, CSS, and JavaScript, featuring interactive UI elements, smooth animations, and a clean user-friendly design for showcasing menu items and services.",
+      tags: ["HTML", "CSS", "JavaScript", "Responsive Design"],
+      github: "#",
+      live: "brewbeanscoffeeshop.netlify.app",
+      image: "https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&q=80&w=800",
     }
   ],
   certifications: [
@@ -100,14 +108,14 @@ const seedData = {
 mongoose.connect(MONGODB_URI)
   .then(async () => {
     console.log('Connected to MongoDB');
-    
+
     // Clear existing data
     await PortfolioData.deleteMany({});
-    
+
     // Insert new data
     const newData = new PortfolioData(seedData);
     await newData.save();
-    
+
     console.log('Portfolio data seeded successfully!');
     process.exit(0);
   })

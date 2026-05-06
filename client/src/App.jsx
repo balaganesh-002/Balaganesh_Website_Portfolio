@@ -8,6 +8,7 @@ import Certifications from './components/Certifications';
 import Achievements from './components/Achievements';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
+import CustomCursor from './components/CustomCursor';
 
 function App() {
   const [darkMode, setDarkMode] = useState(true);
@@ -28,7 +29,8 @@ function App() {
     // Fetch data from backend
     const fetchData = async () => {
       try {
-        const res = await fetch('http://localhost:5000/api/portfolio');
+        const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+        const res = await fetch(`${apiUrl}/api/portfolio`);
         if (res.ok) {
           const data = await res.json();
           setPortfolioData(data);
@@ -69,7 +71,9 @@ function App() {
   const data = portfolioData || {};
 
   return (
-    <div className="min-h-screen bg-white dark:bg-dark-bg text-slate-800 dark:text-slate-200 transition-colors duration-500 font-sans">
+    <div className="min-h-screen bg-white dark:bg-dark-bg text-slate-800 dark:text-slate-200 transition-colors duration-500 font-sans relative">
+      <div className="absolute inset-0 bg-grid-pattern opacity-10 pointer-events-none fixed"></div>
+      <CustomCursor />
       <Navbar darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
       <main>
         <Hero darkMode={darkMode} toggleDarkMode={toggleDarkMode} data={data.about} />

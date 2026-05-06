@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 const Navbar = ({ darkMode, toggleDarkMode }) => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -31,11 +32,23 @@ const Navbar = ({ darkMode, toggleDarkMode }) => {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
-          <div className="flex-shrink-0">
-            <a href="#home" className="text-2xl font-bold tracking-tighter text-primary-600 dark:text-primary-400">
-              Balaganesh S
+          <motion.div 
+            className="flex-shrink-0"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            <a href="#home" className="text-2xl font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-primary-600 to-primary-400 dark:from-neon-blue dark:to-neon-purple flex items-center gap-1 group">
+              Balaganesh
+              <motion.span 
+                className="text-primary-500 dark:text-white inline-block"
+                animate={{ rotate: [0, 10, -10, 0] }}
+                transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+              >
+                .
+              </motion.span>
+              S
             </a>
-          </div>
+          </motion.div>
 
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center space-x-8">

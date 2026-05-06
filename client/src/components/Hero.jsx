@@ -60,13 +60,13 @@ const Hero = ({ darkMode, toggleDarkMode, data }) => {
               variants={container}
               initial="hidden"
               animate="visible"
-              className="flex justify-center md:justify-start overflow-hidden flex-wrap mb-2"
+              className="flex justify-center md:justify-start overflow-hidden flex-wrap mb-4"
             >
               {nameLetters.map((letter, index) => (
                 <motion.span
                   key={index}
                   variants={child}
-                  className="text-4xl md:text-5xl lg:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-r from-slate-900 to-primary-800 dark:from-white dark:to-primary-300 drop-shadow-sm tracking-tighter hover:text-primary-500 dark:hover:text-neon-blue transition-colors duration-300 cursor-default"
+                  className="text-4xl md:text-5xl lg:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-slate-900 to-primary-800 dark:from-white dark:to-primary-300 drop-shadow-sm tracking-tight hover:text-primary-500 dark:hover:text-neon-blue transition-colors duration-300 cursor-default"
                 >
                   {letter === " " ? "\u00A0" : letter}
                 </motion.span>
@@ -95,22 +95,31 @@ const Hero = ({ darkMode, toggleDarkMode, data }) => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 2.2 }}
-              className="flex flex-col sm:flex-row items-center justify-center md:justify-start gap-6"
+              className="flex flex-col sm:flex-row items-center justify-center md:justify-start gap-4"
             >
               <a 
                 href="#projects" 
-                className="group relative w-full sm:w-auto flex items-center justify-center gap-2 bg-gradient-to-r from-primary-600 to-primary-800 dark:from-primary-600 dark:to-neon-purple text-white px-8 py-4 rounded-full font-bold transition-all hover:scale-105 shadow-[0_0_20px_rgba(124,58,237,0.5)] overflow-hidden"
+                className="group relative w-full sm:w-auto flex items-center justify-center gap-2 bg-gradient-to-r from-primary-600 to-primary-800 dark:from-primary-600 dark:to-neon-purple text-white px-6 py-3 rounded-full font-bold transition-all hover:scale-105 shadow-[0_0_20px_rgba(124,58,237,0.5)] overflow-hidden text-sm md:text-base"
               >
                 <div className="absolute inset-0 w-full h-full bg-white/20 transform -skew-x-12 -translate-x-full group-hover:animate-shine"></div>
                 View Projects
-                <ArrowRight size={20} className="group-hover:translate-x-2 transition-transform" />
+                <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
               </a>
               <a 
                 href="#contact" 
-                className="w-full sm:w-auto flex items-center justify-center gap-2 bg-transparent border-2 border-slate-300 dark:border-primary-500/50 hover:border-primary-600 dark:hover:border-neon-blue text-slate-800 dark:text-white px-8 py-4 rounded-full font-bold transition-all hover:scale-105 hover:shadow-[0_0_15px_rgba(0,240,255,0.3)] dark:hover:shadow-[0_0_15px_rgba(0,240,255,0.3)]"
+                className="w-full sm:w-auto flex items-center justify-center gap-2 bg-transparent border-2 border-slate-300 dark:border-primary-500/50 hover:border-primary-600 dark:hover:border-neon-blue text-slate-800 dark:text-white px-6 py-3 rounded-full font-bold transition-all hover:scale-105 hover:shadow-[0_0_15px_rgba(0,240,255,0.3)] dark:hover:shadow-[0_0_15px_rgba(0,240,255,0.3)] text-sm md:text-base"
               >
-                <Mail size={20} />
+                <Mail size={18} />
                 Contact Me
+              </a>
+              <a 
+                href="/resume.pdf" 
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full sm:w-auto flex items-center justify-center gap-2 text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-neon-blue px-4 py-3 font-bold transition-colors text-sm md:text-base"
+              >
+                <Download size={18} />
+                Download Resume
               </a>
             </motion.div>
           </motion.div>

@@ -1,50 +1,66 @@
 import { Trophy } from 'lucide-react';
 import { motion } from 'framer-motion';
 
-const Achievements = () => {
+const Achievements = ({ data }) => {
+  if (!data || data.length === 0) return null;
+
   return (
-    <section className="py-20 bg-slate-50 dark:bg-dark-surface/50">
+    <section className="py-24 bg-white dark:bg-dark-surface transition-colors duration-300 border-t border-slate-100 dark:border-slate-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-16"
+        >
           <h2 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-4">
             Achievements
           </h2>
           <div className="w-16 h-1 bg-primary-500 mx-auto rounded-full"></div>
-        </div>
+        </motion.div>
 
-        <div className="max-w-3xl mx-auto">
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="relative p-8 rounded-2xl bg-gradient-to-br from-primary-600 to-primary-800 text-white shadow-xl overflow-hidden"
-          >
-            {/* Background pattern */}
-            <div className="absolute top-0 right-0 -mt-8 -mr-8 w-64 h-64 bg-white opacity-5 rounded-full blur-3xl"></div>
-            <div className="absolute bottom-0 left-0 -mb-8 -ml-8 w-48 h-48 bg-black opacity-10 rounded-full blur-2xl"></div>
-            
-            <div className="relative z-10 flex flex-col md:flex-row items-center md:items-start gap-6 text-center md:text-left">
-              <div className="p-4 bg-white/10 backdrop-blur-sm rounded-2xl shrink-0">
-                <Trophy size={48} className="text-yellow-400" />
-              </div>
+        <div className="flex flex-wrap justify-center gap-8 max-w-6xl mx-auto">
+          {data.map((item, idx) => (
+            <motion.div 
+              key={idx}
+              initial={{ opacity: 0, scale: 0.9, y: 30 }}
+              whileInView={{ opacity: 1, scale: 1, y: 0 }}
+              whileHover={{ scale: 1.05, y: -10 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: idx * 0.1, type: "spring", stiffness: 200 }}
+              className="group bg-white dark:bg-dark-surface p-10 rounded-3xl flex flex-col items-center text-center border-2 border-slate-100 dark:border-slate-800 shadow-lg hover:shadow-[0_0_40px_rgba(124,58,237,0.2)] hover:border-primary-500/30 transition-all duration-500 relative overflow-hidden w-full sm:w-[calc(100%-2rem)] md:w-[calc(50%-2rem)] lg:w-[calc(33.333%-2rem)]"
+            >
+              {/* Background gradient effect on hover */}
+              <div className="absolute inset-0 bg-gradient-to-br from-primary-600/5 via-transparent to-neon-blue/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"></div>
               
-              <div>
-                <div className="inline-block px-3 py-1 bg-white/20 rounded-full text-sm font-semibold tracking-wider uppercase mb-3">
-                  Finalist
+              {/* Center Animated Icon Container */}
+              <div className="relative w-24 h-24 rounded-full flex items-center justify-center mb-8 shadow-inner group-hover:shadow-[0_0_30px_rgba(0,240,255,0.3)] transition-all duration-500 overflow-hidden">
+                 <div className="absolute inset-0 bg-gradient-to-br from-primary-500 to-neon-blue opacity-10 group-hover:opacity-100 transition-opacity duration-500"></div>
+                 <Trophy className="w-10 h-10 text-primary-600 dark:text-primary-400 group-hover:text-white transition-colors duration-500 relative z-10 group-hover:scale-110" />
+              </div>
+                
+              <div className="relative z-10 flex flex-col items-center w-full">
+                <div className="inline-block px-4 py-1.5 bg-gradient-to-r from-primary-500/10 to-neon-blue/10 border border-primary-500/20 text-primary-700 dark:text-primary-300 rounded-full text-xs font-bold tracking-widest uppercase mb-4 group-hover:border-primary-500/50 transition-colors">
+                  {item.event}
                 </div>
-                <h3 className="text-2xl md:text-3xl font-bold mb-2">
-                  LangAlthon 2025
+                
+                <h3 className="text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-slate-900 to-slate-700 dark:from-white dark:to-slate-300 group-hover:from-primary-500 group-hover:to-neon-blue transition-all duration-500 mb-4">
+                  {item.title}
                 </h3>
-                <p className="text-primary-100 text-lg mb-4">
-                  Recognized for the innovative <span className="font-semibold text-white">"Voice to Code"</span> solution.
+                
+                <p className="text-slate-600 dark:text-slate-400 leading-relaxed text-sm mb-6 font-medium">
+                  {item.description}
                 </p>
-                <p className="text-sm text-primary-200 leading-relaxed">
-                  Competed against top developers to build AI-driven solutions, demonstrating strong problem-solving skills and the ability to integrate cutting-edge language models into practical applications.
+                
+                <div className="w-12 h-1 bg-gradient-to-r from-primary-500 to-neon-blue rounded-full mb-6 opacity-30 group-hover:opacity-100 group-hover:w-24 transition-all duration-500"></div>
+                
+                <p className="text-xs text-slate-500 dark:text-slate-500 leading-relaxed max-w-[250px]">
+                  {item.details}
                 </p>
               </div>
-            </div>
-          </motion.div>
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>
