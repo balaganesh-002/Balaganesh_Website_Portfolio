@@ -10,13 +10,114 @@ import Contact from './components/Contact';
 import Footer from './components/Footer';
 import CustomCursor from './components/CustomCursor';
 
+// Fallback data so the site always works, even without the backend
+const fallbackData = {
+  about: {
+    headline: "Hello, I am",
+    title: "MERN Stack Developer",
+    tagline: "Passionate about building scalable full-stack applications with clean architecture. Transforming complex problems into elegant, user-friendly digital solutions.",
+    description: "I am a dedicated Computer Science student and a passionate full-stack developer with a strong foundation in modern web technologies.",
+    education: {
+      degree: "B.E. Computer Science and Engineering",
+      institution: "Solamalai College of Engineering",
+      period: "2022 – 2026",
+      details: "Focusing on core computer science principles, software engineering, and full-stack web development.",
+    },
+    experience: {
+      role: "Intern",
+      company: "Hita Soft Pvt Ltd",
+      period: "Recent",
+      highlights: [
+        "Transformed UI/UX designs into responsive, production-ready code.",
+        "Emphasized writing clean, maintainable, and scalable full-stack applications.",
+      ],
+    }
+  },
+  skills: [
+    {
+      category: "Frontend Development",
+      icon: "Layout",
+      items: [
+        { name: "React.js", level: 90 },
+        { name: "JavaScript (ES6+)", level: 85 },
+        { name: "Tailwind CSS", level: 95 },
+        { name: "HTML5 & CSS3", level: 90 }
+      ]
+    },
+    {
+      category: "Backend Development",
+      icon: "Server",
+      items: [
+        { name: "Node.js", level: 80 },
+        { name: "Express.js", level: 85 },
+        { name: "RESTful APIs", level: 90 },
+        { name: "Auth (JWT)", level: 85 }
+      ]
+    },
+    {
+      category: "Database",
+      icon: "Database",
+      items: [
+        { name: "MongoDB", level: 85 },
+        { name: "Mongoose", level: 85 },
+        { name: "NoSQL Design", level: 80 }
+      ]
+    }
+  ],
+  projects: [
+    {
+      title: "JobKicker",
+      description: "A freelance marketplace platform with role-based dashboards for freelancers and clients. Features reusable React components for scalable UI architecture.",
+      tags: ["React.js", "Node.js", "Express", "MongoDB", "Tailwind CSS"],
+      github: "#",
+      live: "https://jobkickers.netlify.app",
+      image: "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&q=80&w=800",
+    },
+    {
+      title: "Food Delivery Application",
+      description: "A dynamic React-based food delivery application showcasing robust product handling, state management via hooks, and seamless user interaction.",
+      tags: ["React.js", "Context API", "CSS/SCSS", "REST API"],
+      github: "#",
+      live: "https://ecommerence-food-website.netlify.app",
+      image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&q=80&w=800",
+    },
+    {
+      title: "Coffee Shop Website",
+      description: "A responsive coffee shop website built using HTML, CSS, and JavaScript, featuring interactive UI elements, smooth animations, and a clean user-friendly design.",
+      tags: ["HTML", "CSS", "JavaScript", "Responsive Design"],
+      github: "#",
+      live: "https://brewbeanscoffeeshop.netlify.app",
+      image: "https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&q=80&w=800",
+    }
+  ],
+  certifications: [
+    {
+      title: "Full Stack Web Development",
+      issuer: "Udemy / Coursera",
+      date: "2024",
+    },
+    {
+      title: "React - The Complete Guide",
+      issuer: "Academind",
+      date: "2023",
+    }
+  ],
+  achievements: [
+    {
+      title: "LangAlthon 2025",
+      event: "Finalist",
+      description: 'Recognized for the innovative "Voice to Code" solution.',
+      details: "Competed against top developers to build AI-driven solutions, demonstrating strong problem-solving skills and the ability to integrate cutting-edge language models into practical applications.",
+    }
+  ]
+};
+
 function App() {
   const [darkMode, setDarkMode] = useState(true);
   const [portfolioData, setPortfolioData] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Check user preference from localStorage or system
     const savedMode = localStorage.getItem('darkMode');
     if (savedMode === 'true') {
       setDarkMode(true);
@@ -26,7 +127,6 @@ function App() {
       setDarkMode(true);
     }
     
-    // Fetch data from backend
     const fetchData = async () => {
       try {
         const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
@@ -36,7 +136,7 @@ function App() {
           setPortfolioData(data);
         }
       } catch (error) {
-        console.error("Failed to fetch portfolio data", error);
+        console.error("Failed to fetch portfolio data, using fallback", error);
       } finally {
         setLoading(false);
       }
@@ -67,8 +167,8 @@ function App() {
     );
   }
 
-  // If no data is available from backend, fallback to empty object to prevent crashes
-  const data = portfolioData || {};
+  // Use API data if available, otherwise use fallback data
+  const data = portfolioData || fallbackData;
 
   return (
     <div className="min-h-screen bg-white dark:bg-dark-bg text-slate-800 dark:text-slate-200 transition-colors duration-500 font-sans relative">
@@ -90,3 +190,4 @@ function App() {
 }
 
 export default App;
+
