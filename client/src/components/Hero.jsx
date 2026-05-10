@@ -13,7 +13,7 @@ const Hero = ({ darkMode, toggleDarkMode, data }) => {
     hidden: { opacity: 0 },
     visible: (i = 1) => ({
       opacity: 1,
-      transition: { staggerChildren: 0.1, delayChildren: 0.3 * i },
+      transition: { staggerChildren: 0.08, delayChildren: 0.3 * i },
     }),
   };
 
@@ -30,6 +30,16 @@ const Hero = ({ darkMode, toggleDarkMode, data }) => {
     hidden: {
       opacity: 0,
       y: 50,
+    },
+  };
+
+  /* floating animation for the profile image */
+  const floatingAnimation = {
+    y: [0, -12, 0],
+    transition: {
+      duration: 4,
+      repeat: Infinity,
+      ease: 'easeInOut',
     },
   };
 
@@ -95,51 +105,76 @@ const Hero = ({ darkMode, toggleDarkMode, data }) => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 2.2 }}
-              className="flex flex-col sm:flex-row items-center justify-center md:justify-start gap-4"
+              className="flex flex-col sm:flex-row items-center justify-center md:justify-start gap-4 w-full"
             >
-              <a 
-                href="#projects" 
-                className="group relative w-full sm:w-auto flex items-center justify-center gap-2 bg-gradient-to-r from-primary-600 to-primary-800 dark:from-primary-600 dark:to-neon-purple text-white px-6 py-3 rounded-full font-bold transition-all hover:scale-105 shadow-[0_0_20px_rgba(124,58,237,0.5)] overflow-hidden text-sm md:text-base"
+              {/* Primary CTA – View Projects */}
+              <motion.a 
+                href="#projects"
+                whileHover={{ scale: 1.06, boxShadow: '0 0 45px rgba(124,58,237,0.6)' }}
+                whileTap={{ scale: 0.96 }}
+                className="group relative w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-gradient-to-r from-primary-600 via-primary-700 to-neon-purple text-white px-8 py-4 rounded-2xl font-bold transition-all duration-500 shadow-[0_4px_25px_rgba(124,58,237,0.4)] overflow-hidden text-base"
               >
-                <div className="absolute inset-0 w-full h-full bg-white/20 transform -skew-x-12 -translate-x-full group-hover:animate-shine"></div>
-                View Projects
-                <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
-              </a>
-              <a 
-                href="#contact" 
-                className="w-full sm:w-auto flex items-center justify-center gap-2 bg-transparent border-2 border-slate-300 dark:border-primary-500/50 hover:border-primary-600 dark:hover:border-neon-blue text-slate-800 dark:text-white px-6 py-3 rounded-full font-bold transition-all hover:scale-105 hover:shadow-[0_0_15px_rgba(0,240,255,0.3)] dark:hover:shadow-[0_0_15px_rgba(0,240,255,0.3)] text-sm md:text-base"
+                {/* Shine sweep */}
+                <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/25 to-transparent transform -skew-x-12 -translate-x-full group-hover:animate-shine" />
+                {/* Pulse ring */}
+                <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 animate-pulse bg-gradient-to-r from-primary-500/20 to-neon-purple/20 blur-lg -z-10" />
+                <span className="relative z-10">View Projects</span>
+                <ArrowRight size={18} className="relative z-10 group-hover:translate-x-1.5 transition-transform duration-300" />
+              </motion.a>
+
+              {/* Secondary CTA – Contact Me */}
+              <motion.a 
+                href="#contact"
+                whileHover={{ scale: 1.06, boxShadow: '0 0 30px rgba(0,240,255,0.35)' }}
+                whileTap={{ scale: 0.96 }}
+                className="group w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-white/[0.06] backdrop-blur-xl border-2 border-primary-500/40 dark:border-neon-blue/30 hover:border-primary-500 dark:hover:border-neon-blue text-slate-800 dark:text-white px-8 py-4 rounded-2xl font-bold transition-all duration-500 text-base relative overflow-hidden"
               >
-                <Mail size={18} />
-                Contact Me
-              </a>
-              <a 
-                href="/resume.pdf" 
+                {/* Subtle gradient fill on hover */}
+                <div className="absolute inset-0 bg-gradient-to-r from-primary-600/10 to-neon-blue/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl" />
+                <Mail size={18} className="relative z-10 group-hover:scale-110 group-hover:text-neon-blue transition-all duration-300" />
+                <span className="relative z-10">Contact Me</span>
+              </motion.a>
+
+              {/* Tertiary CTA – Download Resume */}
+              <motion.a 
+                href="/balaganesh__resume_.jpeg"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full sm:w-auto flex items-center justify-center gap-2 text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-neon-blue px-4 py-3 font-bold transition-colors text-sm md:text-base"
+                download="Balaganesh_S_Resume"
+                whileHover={{ scale: 1.06, y: -2 }}
+                whileTap={{ scale: 0.96 }}
+                className="group w-full sm:w-auto inline-flex items-center justify-center gap-2.5 bg-slate-100/80 dark:bg-white/[0.06] backdrop-blur-xl border border-slate-200/80 dark:border-white/[0.1] hover:border-primary-500/40 dark:hover:border-primary-500/30 text-slate-700 dark:text-slate-300 hover:text-primary-600 dark:hover:text-neon-blue px-7 py-3.5 rounded-2xl font-bold transition-all duration-500 text-sm hover:shadow-[0_4px_20px_rgba(139,92,246,0.15)]"
               >
-                <Download size={18} />
-                Download Resume
-              </a>
+                <Download size={18} className="group-hover:animate-bounce" />
+                <span>Download Resume</span>
+              </motion.a>
             </motion.div>
           </motion.div>
 
-          {/* Right Column: Profile Image */}
+          {/* Right Column: Floating Profile Image */}
           <motion.div 
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.5, type: "spring" }}
             className="flex-1 flex justify-center md:justify-end relative"
           >
-            <div className="relative w-64 h-64 md:w-80 md:h-80 rounded-full border-4 border-white/10 dark:border-white/5 shadow-[0_0_40px_rgba(124,58,237,0.3)] overflow-hidden group">
-              <div className="absolute inset-0 bg-gradient-to-tr from-primary-900/50 to-transparent group-hover:opacity-0 transition-opacity duration-500 z-10"></div>
-              <img 
-                src="/profile.png" 
-                alt="Balaganesh S" 
-                className="w-full h-full object-cover rounded-full transform group-hover:scale-110 transition-transform duration-700"
-                style={{ borderRadius: '100%' }}
-              />
-            </div>
+            <motion.div
+              animate={floatingAnimation}
+              className="relative"
+            >
+              {/* Outer glow ring */}
+              <div className="absolute -inset-3 rounded-full bg-gradient-to-tr from-primary-500/30 to-neon-blue/30 blur-xl opacity-60 animate-pulse pointer-events-none" />
+              
+              <div className="relative w-64 h-64 md:w-80 md:h-80 rounded-full border-4 border-white/10 dark:border-white/5 shadow-[0_0_40px_rgba(124,58,237,0.3)] overflow-hidden group">
+                <div className="absolute inset-0 bg-gradient-to-tr from-primary-900/50 to-transparent group-hover:opacity-0 transition-opacity duration-500 z-10"></div>
+                <img 
+                  src="/profile.png" 
+                  alt="Balaganesh S" 
+                  className="w-full h-full object-cover rounded-full transform group-hover:scale-110 transition-transform duration-700"
+                  style={{ borderRadius: '100%' }}
+                />
+              </div>
+            </motion.div>
           </motion.div>
 
         </div>
