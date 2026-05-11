@@ -77,25 +77,6 @@ const seedData = {
       image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&q=80&w=800",
     },
     {
-      title: "FixiGo - Real-Time Service Booking Platform",
-      description:
-        "A production-level MERN stack application inspired by Uber and Rapido, enabling users to book nearby mechanics and home service providers in real time with live tracking, Socket.io communication, Razorpay UPI payments, role-based dashboards, and advanced admin controls.",
-      tags: [
-        "MongoDB",
-        "Express.js",
-        "React.js",
-        "Node.js",
-        "Socket.io",
-        "JWT Auth",
-        "Tailwind CSS",
-        "Google Maps API",
-      ],
-      github: "https://github.com/balaganesh-002",
-      live: "https://balaganesh-002.github.io/On-Demand-Service-Booking-Platform/",
-      image:
-        "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&q=80&w=800",
-    },
-    {
       title: "Coffee Shop Website",
       description: "A responsive coffee shop website built using HTML, CSS, and JavaScript, featuring interactive UI elements, smooth animations, and a clean user-friendly design for showcasing menu items and services.",
       tags: ["HTML", "CSS", "JavaScript", "Responsive Design"],

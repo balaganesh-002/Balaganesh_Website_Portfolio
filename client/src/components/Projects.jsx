@@ -44,19 +44,6 @@ const projectsData = [
     },
   },
   {
-    title: 'FixFlow - Real-Time Service Platform',
-    description: 'A production-level MERN stack application inspired by Uber and Rapido, enabling users to book nearby mechanics and home service providers in real time with live tracking and role-based dashboards.',
-    image: 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&q=80&w=800',
-    github: `${GITHUB_PROFILE}`,
-    live: 'https://balaganesh-002.github.io/On-Demand-Service-Booking-Platform/',
-    techStack: {
-      Frontend: ['React.js', 'Tailwind CSS', 'Framer Motion'],
-      Backend: ['Node.js', 'Express.js', 'Socket.io'],
-      Database: ['MongoDB', 'Mongoose'],
-      API: ['REST API', 'JWT Auth', 'Google Maps API', 'Razorpay API'],
-    },
-  },
-  {
     title: 'Coffee Shop Website',
     description: 'A responsive coffee shop website built using HTML, CSS, and JavaScript, featuring interactive UI elements, smooth animations, and a clean user-friendly design.',
     image: 'https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&q=80&w=800',
@@ -306,7 +293,7 @@ const Projects = ({ data }) => {
         </motion.div>
 
         {/* Project Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {projects.map((project, idx) => (
             <ProjectCard key={idx} project={project} index={idx} />
           ))}
