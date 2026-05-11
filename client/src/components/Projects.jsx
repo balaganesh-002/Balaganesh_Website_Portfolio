@@ -18,42 +18,16 @@ const categoryConfig = {
 /* ─── project data (scalable structure) ─── */
 const projectsData = [
   {
-    title: 'JobKicker',
-    description: 'A freelance marketplace platform with role-based dashboards for freelancers and clients. Features reusable React components for scalable UI architecture.',
-    image: 'https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&q=80&w=800',
+    title: 'Fixigo - Real-Time Service Booking Platform',
+    description: 'A production-level MERN stack application inspired by Uber and Rapido, enabling users to book nearby mechanics and home service providers in real time with live tracking, Socket.io communication, Razorpay UPI payments, role-based dashboards, and advanced admin controls.',
+    image: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&q=80&w=800',
     github: `${GITHUB_PROFILE}`,
-    live: 'https://jobkickers.netlify.app',
+    live: 'https://fixflow-app.netlify.app',
     techStack: {
-      Frontend: ['React.js', 'Tailwind CSS', 'Responsive Design'],
-      Backend: ['Node.js', 'Express.js'],
+      Frontend: ['React.js', 'Tailwind CSS', 'Framer Motion'],
+      Backend: ['Node.js', 'Express.js', 'Socket.io'],
       Database: ['MongoDB', 'Mongoose'],
-      API: ['REST API', 'JWT Auth'],
-    },
-  },
-  {
-    title: 'Food Delivery Application',
-    description: 'A dynamic React-based food delivery application showcasing robust product handling, state management via hooks, and seamless user interaction.',
-    image: 'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&q=80&w=800',
-    github: `${GITHUB_PROFILE}`,
-    live: 'https://ecommerence-food-website.netlify.app',
-    techStack: {
-      Frontend: ['React.js', 'CSS/SCSS', 'Context API'],
-      Backend: ['Node.js'],
-      Database: ['MongoDB'],
-      API: ['REST API', 'Fetch API'],
-    },
-  },
-  {
-    title: 'Coffee Shop Website',
-    description: 'A responsive coffee shop website built using HTML, CSS, and JavaScript, featuring interactive UI elements, smooth animations, and a clean user-friendly design.',
-    image: 'https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&q=80&w=800',
-    github: `${GITHUB_PROFILE}`,
-    live: 'https://brewbeanscoffeeshop.netlify.app',
-    techStack: {
-      Frontend: ['HTML5', 'CSS3', 'JavaScript'],
-      Backend: [],
-      Database: [],
-      API: [],
+      API: ['JWT Auth', 'Razorpay API', 'Google Maps API'],
     },
   },
 ];
@@ -293,11 +267,12 @@ const Projects = ({ data }) => {
         </motion.div>
 
         {/* Project Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="flex justify-center">
+          <div className="w-full max-w-md">
           {projects.map((project, idx) => (
             <ProjectCard key={idx} project={project} index={idx} />
           ))}
-        </div>
+          </div>
       </div>
     </section>
   );
