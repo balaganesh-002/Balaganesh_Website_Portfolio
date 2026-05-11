@@ -30,6 +30,45 @@ const projectsData = [
       API: ['JWT Auth'],
     },
   },
+  {
+    title: 'JobKicker',
+    description: 'A freelance marketplace platform with role-based dashboards for freelancers and clients. Features reusable React components for scalable UI architecture.',
+    image: 'https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&q=80&w=800',
+    github: `${GITHUB_PROFILE}`,
+    live: 'https://jobkickers.netlify.app',
+    techStack: {
+      Frontend: ['React.js', 'Tailwind CSS', 'Responsive Design'],
+      Backend: ['Node.js', 'Express.js'],
+      Database: ['MongoDB', 'Mongoose'],
+      API: ['REST API', 'JWT Auth'],
+    },
+  },
+  {
+    title: 'Food Delivery Application',
+    description: 'A dynamic React-based food delivery application showcasing robust product handling, state management via hooks, and seamless user interaction.',
+    image: 'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&q=80&w=800',
+    github: `${GITHUB_PROFILE}`,
+    live: 'https://ecommerence-food-website.netlify.app',
+    techStack: {
+      Frontend: ['React.js', 'CSS/SCSS', 'Context API'],
+      Backend: ['Node.js'],
+      Database: ['MongoDB'],
+      API: ['REST API', 'Fetch API'],
+    },
+  },
+  {
+    title: 'Coffee Shop Website',
+    description: 'A responsive coffee shop website built using HTML, CSS, and JavaScript, featuring interactive UI elements, smooth animations, and a clean user-friendly design.',
+    image: 'https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&q=80&w=800',
+    github: `${GITHUB_PROFILE}`,
+    live: 'https://brewbeanscoffeeshop.netlify.app',
+    techStack: {
+      Frontend: ['HTML5', 'CSS3', 'JavaScript'],
+      Backend: [],
+      Database: [],
+      API: [],
+    },
+  },
 ];
 
 /* ─── animation variants ─── */
@@ -60,7 +99,6 @@ const tagVariants = {
 
 /* ─── Tech Category Buttons ─── */
 const TechCategoryButtons = ({ techStack, activeCategory, onSelect }) => {
-  // Only show categories that have items
   const availableCategories = ['All', ...Object.keys(techStack).filter(cat => techStack[cat]?.length > 0)];
 
   return (
@@ -83,7 +121,6 @@ const TechCategoryButtons = ({ techStack, activeCategory, onSelect }) => {
               }
             `}
           >
-            {/* Active gradient background */}
             {isActive && (
               <motion.div
                 layoutId={`cat-bg-${Math.random()}`}
@@ -108,7 +145,6 @@ const TechCategoryButtons = ({ techStack, activeCategory, onSelect }) => {
 const TechTags = ({ techStack, activeCategory }) => {
   let tags = [];
   if (activeCategory === 'All') {
-    // Flatten all categories
     Object.entries(techStack).forEach(([cat, items]) => {
       items.forEach(item => tags.push({ name: item, category: cat }));
     });
@@ -164,17 +200,12 @@ const ProjectCard = ({ project, index }) => {
     >
       {/* Image Section */}
       <div className="relative h-44 overflow-hidden border-b border-slate-200 dark:border-slate-700">
-        {/* Hover overlay */}
         <div className="absolute inset-0 bg-slate-900/60 dark:bg-dark-bg/80 z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 backdrop-blur-sm" />
-
-        {/* Image with zoom */}
         <img
           src={project.image}
           alt={project.title}
           className="w-full h-full object-cover transform scale-100 group-hover:scale-115 transition-transform duration-700 ease-out"
         />
-
-        {/* Floating links */}
         <div className="absolute inset-0 z-20 flex flex-col items-center justify-center gap-3 opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-6 group-hover:translate-y-0">
           <motion.a
             href={project.live}
@@ -210,14 +241,12 @@ const ProjectCard = ({ project, index }) => {
           {project.description}
         </p>
 
-        {/* Category Buttons */}
         <TechCategoryButtons
           techStack={project.techStack}
           activeCategory={activeCategory}
           onSelect={setActiveCategory}
         />
 
-        {/* Tech Tags */}
         <TechTags
           techStack={project.techStack}
           activeCategory={activeCategory}
@@ -229,8 +258,6 @@ const ProjectCard = ({ project, index }) => {
 
 /* ─── Main Projects Component ─── */
 const Projects = ({ data }) => {
-  // Merge incoming API/fallback data with local enriched data
-  // This allows backward compatibility while supporting the new structure
   const projects = projectsData;
 
   return (
@@ -267,13 +294,12 @@ const Projects = ({ data }) => {
         </motion.div>
 
         {/* Project Grid */}
-        <div className="flex justify-center">
-          <div className="w-full max-w-md">
-            {projects.map((project, idx) => (
-              <ProjectCard key={idx} project={project} index={idx} />
-            ))}
-          </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {projects.map((project, idx) => (
+            <ProjectCard key={idx} project={project} index={idx} />
+          ))}
         </div>
+      </div>
     </section>
   );
 };
