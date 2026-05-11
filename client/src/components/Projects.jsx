@@ -21,13 +21,13 @@ const projectsData = [
     title: 'Fixigo - Real-Time Service Booking Platform',
     description: 'A production-level MERN stack application inspired by Uber and Rapido, enabling users to book nearby mechanics and home service providers in real time with live tracking, Socket.io communication, Razorpay UPI payments, role-based dashboards, and advanced admin controls.',
     image: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&q=80&w=800',
-    github: `${GITHUB_PROFILE}`,
+    github: '#',
     live: 'https://fixflow-app.netlify.app',
     techStack: {
-      Frontend: ['React.js', 'Tailwind CSS', 'Framer Motion'],
+      Frontend: ['React.js', 'Tailwind CSS'],
       Backend: ['Node.js', 'Express.js', 'Socket.io'],
-      Database: ['MongoDB', 'Mongoose'],
-      API: ['JWT Auth', 'Razorpay API', 'Google Maps API'],
+      Database: ['MongoDB'],
+      API: ['JWT Auth'],
     },
   },
 ];
@@ -269,11 +269,11 @@ const Projects = ({ data }) => {
         {/* Project Grid */}
         <div className="flex justify-center">
           <div className="w-full max-w-md">
-          {projects.map((project, idx) => (
-            <ProjectCard key={idx} project={project} index={idx} />
-          ))}
+            {projects.map((project, idx) => (
+              <ProjectCard key={idx} project={project} index={idx} />
+            ))}
           </div>
-      </div>
+        </div>
     </section>
   );
 };

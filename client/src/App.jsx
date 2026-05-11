@@ -68,7 +68,7 @@ const fallbackData = {
     {
       title: "Fixigo - Real-Time Service Booking Platform",
       description: "A production-level MERN stack application inspired by Uber and Rapido, enabling users to book nearby mechanics and home service providers in real time with live tracking, Socket.io communication, Razorpay UPI payments, role-based dashboards, and advanced admin controls.",
-      tags: ["MongoDB", "Express.js", "React.js", "Node.js", "Socket.io", "JWT Auth", "Tailwind CSS", "Framer Motion", "Razorpay API", "Google Maps API"],
+      tags: ["MongoDB", "Express.js", "React.js", "Node.js", "Socket.io", "JWT Auth", "Tailwind CSS"],
       github: "#",
       live: "https://fixflow-app.netlify.app",
       image: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&q=80&w=800",
